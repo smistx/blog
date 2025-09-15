@@ -47,3 +47,8 @@ dfir:
   label: DFIR
   permalink: /dfir
   description: Content related to Digital Forensics and Incident Response, including analysis, investigation, and recovery.
+
+docusaurus:
+  label: Docusaurus
+  permalink: /docusaurus
+  description: Posts related to the Docusaurus static site generator.
