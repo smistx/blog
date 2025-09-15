@@ -1,0 +1,13 @@
+cielo:
+  name: Cielo Shee
+  title: Senior Information Officer/Engineer
+  url: cielo
+  image_url: https://github.com/smistx.png
+  page:
+    # customize the url of the author page at /blog/authors/<permalink>
+    permalink: '/all-cielo-shee-articles'
+  socials:
+    linkedin: https://www.linkedin.com/in/cielo-shee/
+    github: https://github.com/smistx
+    website: https://smistx.github.io/resume/
+

@@ -1,0 +1,281 @@
+/**
+ * Global overrides for Docusaurus
+ * - Infima variables
+ * - Admonitions (tips/info/warning/danger)
+ * - Prism code blocks (Morandi theme, JS/Python/Bash support)
+ */
+
+/* ==========================
+   Root variables (light theme)
+   ========================== */
+:root {
+  /* Primary theme (rose pink) */
+  --ifm-color-primary: #a67c7a;
+  --ifm-color-primary-dark: #946e6c;
+  --ifm-color-primary-darker: #83605e;
+  --ifm-color-primary-darkest: #6b4d4c;
+  --ifm-color-primary-light: #b58a88;
+  --ifm-color-primary-lighter: #c49997;
+  --ifm-color-primary-lightest: #d2a9a8;
+
+  /* Text */
+  --ifm-font-color-base: #4b4646;
+  --ifm-heading-color: #2d2a2b;
+
+  /* Links */
+  --ifm-link-color: #a67c7a;
+  --ifm-link-hover-color: #7d5d5b;
+
+  /* Background */
+  --ifm-background-color: #fbf9f8;
+
+  /* Admonitions */
+  --ifm-color-success: #8e7c93;
+  --ifm-color-success-dark: #7d6a81;
+  --ifm-color-success-darker: #6b566f;
+  --ifm-color-success-contrast-background: #f4f0f6;
+
+  --ifm-color-info: #6c7a89;
+  --ifm-color-info-dark: #59656f;
+  --ifm-color-info-darker: #47525a;
+  --ifm-color-info-contrast-background: #eef2f5;
+
+  --ifm-color-warning: #c9a66b;
+  --ifm-color-warning-dark: #b58f58;
+  --ifm-color-warning-darker: #967849;
+  --ifm-color-warning-contrast-background: #fcf7f0;
+
+  --ifm-color-danger: #a97474;
+  --ifm-color-danger-dark: #8f5f5f;
+  --ifm-color-danger-darker: #744b4b;
+  --ifm-color-danger-contrast-background: #f9f0f0;
+
+  /* Prism code blocks */
+  --prism-background-color: #fdfcfa;
+  --prism-color: #4b4646;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(228, 193, 197, 0.25);
+}
+
+/* ==========================
+   Root variables (dark theme)
+   ========================== */
+[data-theme='dark'] {
+  /* Primary (soft rose) */
+  --ifm-color-primary: #e4c1c5;
+  --ifm-color-primary-dark: #d4a5aa;
+  --ifm-color-primary-darker: #c19095;
+  --ifm-color-primary-darkest: #a77c81;
+  --ifm-color-primary-light: #f6e6e8;
+  --ifm-color-primary-lighter: #f9edef;
+  --ifm-color-primary-lightest: #fff5f6;
+
+  /* Background */
+  --ifm-background-color: #1a1a1a;
+
+  /* Text */
+  --ifm-font-color-base: #cccccc;
+  --ifm-heading-color: #f6e6e8;
+
+  /* Links */
+  --ifm-link-color: #e4c1c5;
+  --ifm-link-hover-color: #f9edef;
+
+  /* Admonitions */
+  --ifm-color-success: #cbbcd5;
+  --ifm-color-success-dark: #b5a3bf;
+  --ifm-color-success-darker: #9d8aa8;
+  --ifm-color-success-contrast-background: #2d2836;
+
+  --ifm-color-info: #aab7c4;
+  --ifm-color-info-dark: #94a3ad;
+  --ifm-color-info-darker: #7f8e97;
+  --ifm-color-info-contrast-background: #242930;
+
+  --ifm-color-warning: #e2c792;
+  --ifm-color-warning-dark: #c9ad74;
+  --ifm-color-warning-darker: #a88757;
+  --ifm-color-warning-contrast-background: #302b24;
+
+  --ifm-color-danger: #d1a0a0;
+  --ifm-color-danger-dark: #b98585;
+  --ifm-color-danger-darker: #976a6a;
+  --ifm-color-danger-contrast-background: #35282a;
+
+  /* Prism code blocks */
+  --prism-background-color: #1a1818;
+  --prism-color: #e7e3df;
+  --docusaurus-highlighted-code-line-bg: rgba(212, 165, 170, 0.3);
+}
+
+/* ==========================
+   Admonitions (tips/info/warning/danger)
+   ========================== */
+.theme-admonition {
+  border-radius: 10px;
+  border-left-width: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 10px rgba(60,50,50,0.06);
+  color: inherit;
+}
+
+.theme-admonition .admonition-heading,
+.theme-admonition .admonition-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+}
+
+/* Success */
+.alert--success {
+  background: var(--ifm-color-success-contrast-background);
+  border-left-color: var(--ifm-color-success);
+  color: var(--ifm-color-success-dark);
+}
+.alert--success .admonition-title { color: var(--ifm-color-success-darker); }
+
+/* Info */
+.alert--info {
+  background: var(--ifm-color-info-contrast-background);
+  border-left-color: var(--ifm-color-info);
+  color: var(--ifm-color-info-dark);
+}
+.alert--info .admonition-title { color: var(--ifm-color-info-darker); }
+
+/* Warning */
+.alert--warning {
+  background: var(--ifm-color-warning-contrast-background);
+  border-left-color: var(--ifm-color-warning);
+  color: var(--ifm-color-warning-dark);
+}
+.alert--warning .admonition-title { color: var(--ifm-color-warning-darker); }
+
+/* Danger */
+.alert--danger {
+  background: var(--ifm-color-danger-contrast-background);
+  border-left-color: var(--ifm-color-danger);
+  color: var(--ifm-color-danger-dark);
+}
+.alert--danger .admonition-title { color: var(--ifm-color-danger-darker); }
+
+/* ==========================
+   Code blocks wrapper
+   ========================== */
+.theme-code-block {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+/* Title bar above code block */
+[class*="codeBlockTitle"] {
+  background: #f3e7e5 !important;
+  color: #5c4b51 !important;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ==========================
+   Prism code blocks (Morandi highlight)
+   ========================== */
+pre[class*="language-"],
+code[class*="language-"] {
+  background: var(--prism-background, #fdf8f7) !important;
+  color: var(--prism-color, #444) !important;
+  font-family: 'Fira Code', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: auto;
+}
+
+/* Inline code */
+code[class*="language-"] {
+  padding: .15em .3em;
+  border-radius: 6px;
+}
+pre[class*="language-"] code {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Comments */
+.token.comment { color: #9e9797 !important; font-style: italic; }
+
+/* Keywords, builtins, functions */
+.token.keyword,
+.token.builtin,
+.token.function,
+.token.class-name {
+  color: var(--ifm-color-danger) !important;
+  font-weight: 600 !important;
+}
+
+/* Strings */
+.token.string,
+.token.char { color: var(--ifm-color-warning) !important; }
+
+/* Numbers, constants */
+.token.number,
+.token.constant { color: var(--ifm-color-info) !important; }
+
+/* Variables, properties */
+.token.variable,
+.token.property { color: var(--ifm-color-success) !important; }
+
+/* Operators, punctuation */
+.token.operator,
+.token.punctuation { color: var(--ifm-color-primary) !important; }
+
+/* ==========================
+   Bash / Shell specific
+   ========================== */
+.language-bash .token.operator,
+.language-sh .token.operator,
+.language-bash .token.punctuation,
+.language-sh .token.punctuation {
+  color: var(--ifm-color-danger) !important;
+  font-weight: 700 !important;
+}
+
+.language-bash .token.function,
+.language-sh .token.function,
+.language-bash .token.command,
+.language-sh .token.command,
+.language-bash .token.builtin,
+.language-sh .token.builtin {
+  color: var(--ifm-color-success) !important;
+  font-weight: 600 !important;
+}
+
+.language-bash .token.attr-name,
+.language-sh .token.attr-name,
+.language-bash .token.parameter,
+.language-sh .token.parameter {
+  color: var(--ifm-color-info) !important;
+}
+
+.language-bash .token.string,
+.language-sh .token.string { color: var(--ifm-color-warning) !important; }
+
+.language-bash .token.number,
+.language-sh .token.number { color: var(--ifm-color-info) !important; }
+
+/* Fallback: colorize all Bash tokens */
+.language-bash .token,
+.language-sh .token { color: var(--ifm-color-success) !important; }
+
+/* ==========================
+   Dark mode overrides
+   ========================== */
+[data-theme='dark'] pre[class*="language-"],
+[data-theme='dark'] code[class*="language-"] {
+  background: var(--prism-background-color) !important;
+  color: var(--prism-color) !important;
+}

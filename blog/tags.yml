@@ -1,0 +1,49 @@
+security:
+  label: Security
+  permalink: /security
+  description: Posts related to application, network, and cloud security, incident response, and threat analysis.
+
+tools:
+  label: Tools
+  permalink: /tools
+  description: Tutorials and reviews of security tools, automation scripts, and useful utilities.
+
+workflow:
+  label: Workflow
+  permalink: /workflow
+  description: DevOps/SecOps workflows, CI/CD security, process guides, and productivity patterns.
+
+hack-the-box:
+  label: Hack The Box
+  permalink: /hack-the-box
+  description: Writeups, labs, and notes from Hack The Box exercises and CTF practice.
+
+cissp:
+  label: CISSP
+  permalink: /cissp
+  description: CISSP study notes, domain summaries, exam tips, and relevant security policy discussions.
+
+self-study:
+  label: Self-study
+  permalink: /self-study
+  description: Learning notes, study plans, book summaries, and resources for self-guided learning.
+
+notes:
+  label: Notes
+  permalink: /notes
+  description: Personal study notes, quick references, and summarized learnings from courses, books, or labs.
+
+demo:
+  label: Demo
+  permalink: /demo
+  description: Demonstrations, proof-of-concepts, and walkthrough examples.
+
+tutorial:
+  label: Tutorial
+  permalink: /tutorial
+  description: Step-by-step guides, hands-on labs, and how-to articles.
+
+dfir:
+  label: DFIR
+  permalink: /dfir
+  description: Content related to Digital Forensics and Incident Response, including analysis, investigation, and recovery.
