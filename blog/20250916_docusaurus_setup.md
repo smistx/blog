@@ -160,14 +160,6 @@ That's it! The command builds your site and pushes it to a `gh-pages` branch, wh
 
 For ongoing updates, I just run `npm run deploy` whenever I want to publish new posts.
 
-## Bonus: Useful Plugins
-
-I've added a few plugins that make life easier:
-
-- **@docusaurus/plugin-google-analytics**: For tracking visitors
-- **@docusaurus/plugin-sitemap**: SEO goodness
-- **@docusaurus/plugin-pwa**: Makes the site work offline
-
 ## Tips and Gotchas
 
 A few things I learned the hard way:
@@ -176,14 +168,6 @@ A few things I learned the hard way:
 - **Base URL**: If you're using GitHub Pages with a custom repo name, don't forget to set `baseUrl` correctly
 - **Tags**: Keep them consistent from the start - refactoring tags later is annoying
 - **Drafts**: Add `draft: true` to frontmatter for posts you're not ready to publish
-
-## What's Next?
-
-Now that the blog is running smoothly, I'm planning to add:
-- A proper About page with my background
-- Better syntax highlighting for security tools
-- Maybe a newsletter signup
-- Custom components for things like CTF writeup templates
 
 ## Reflections
 
