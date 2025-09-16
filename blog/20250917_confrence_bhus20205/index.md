@@ -46,6 +46,7 @@ For example, **Trend Micro** set up a gamified challenge where participants coul
 The hall wasn’t just about technology—it was also about people. Countless side events and networking opportunities made it possible to connect with others from across the industry. Hearing why people chose to stay in big companies, or why others pursued startups, gave me new perspectives on career motivation and fulfillment.  
 
 I also noticed a significant **market gap**: most compliance and security solutions are designed for U.S. and European needs, while Asia-focused solutions are scarce. This often forces Asian companies to buy entire suites but use only a fraction of the features, all while paying a steep price. Many executives therefore abandon solutions altogether.  
+
 This confirmed some of my own observations and gave me new drive to explore opportunities for solutions better suited to Asia’s diverse regulatory landscape.  
 
 Equally important, this was my first time engaging deeply with international vendors in a business setting. I truly appreciated the atmosphere: people expressed their ideas with confidence and passion, while also showing respect for others’ viewpoints. It wasn’t superiority—it was genuine belief in the value of their work.  
@@ -58,6 +59,7 @@ I also joined a **small talk** session hosted by a friend, featuring several wel
 They shared their challenges in the workplace—imbalanced resource allocation, navigating biases, handling workplace dynamics—and how they overcame them to reach their current positions.  
 
 This was not “inspirational talk” for the sake of it, but raw and honest experiences that many in the audience could relate to. For me, it was a reminder of my own journey working across different countries and cultures.  
+
 The key lesson: **openness matters**. Every culture has wisdom worth learning, and every challenge is also a chance to expand one’s worldview. Diversity isn’t just a buzzword—it’s a form of growth and resilience.  
 
 ---
