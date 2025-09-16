@@ -56,6 +56,7 @@ Equally important, this was my first time engaging deeply with international ven
 ## Small Talk: Women in Cybersecurity
 
 I also joined a **small talk** session hosted by a friend, featuring several well-known women in cybersecurity.  
+
 They shared their challenges in the workplace—imbalanced resource allocation, navigating biases, handling workplace dynamics—and how they overcame them to reach their current positions.  
 
 This was not “inspirational talk” for the sake of it, but raw and honest experiences that many in the audience could relate to. For me, it was a reminder of my own journey working across different countries and cultures.  
