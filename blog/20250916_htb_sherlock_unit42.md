@@ -8,19 +8,21 @@ tags: [security, hack-the-box, tutorial, dfir]
 
 This post covers the **Unit42** Sherlock, a challenge inspired by a real-world UltraVNC campaign researched by Palo Alto's Unit42 team.
 
-In this investigation, we will familiarize ourselves with Sysmon logs and analyze various Event IDs to trace malicious activities on a compromised Windows system.
+In this investigation, I'll be diving into Sysmon logs and analyzing various Event IDs to trace malicious activities on a compromised Windows system.
+
+<!--truncate-->
 
 ## Getting Started
 
-After downloading and unzipping `unit42.zip`, we get a Windows event log file: `Microsoft-Windows-Sysmon-Operational.evtx`.
+After downloading and unzipping `unit42.zip`, there's a Windows event log file: `Microsoft-Windows-Sysmon-Operational.evtx`.
 
-Since we are working on macOS, we need a tool to parse this file. We can use `evtx_dump` for this. After installing it via Homebrew (`brew install evtx`), we can convert the log file into a more manageable JSON Lines format.
+Since I'm working on macOS, I needed a tool to parse this file. I used `evtx_dump` for this - after installing it via Homebrew (`brew install evtx`), I converted the log file into a more manageable JSON Lines format.
 
 ```bash
 evtx_dump -o json <path/to/your_file.evtx> > output.jsonl
 ```
 
-With our `output.jsonl` file ready, we can begin the investigation.
+With the `output.jsonl` file ready, time to start digging.
 
 ## The Investigation
 
@@ -28,13 +30,13 @@ With our `output.jsonl` file ready, we can begin the investigation.
 
 **Answer:** `56`
 
-Event ID 11 in Sysmon corresponds to "FileCreate" events. By filtering our `output.jsonl` file for entries where the `EventID` is 11, we can count the total number of files created during the logged timeframe.
+Event ID 11 in Sysmon corresponds to "FileCreate" events. Just filtered the `output.jsonl` file for entries where `EventID` is 11 and counted them up.
 
 ### T2: What is the malicious process that infected the victim's system?
 
 **Answer:** `C:\Users\CyberJunkie\Downloads\Preventivo24.02.14.exe.exe`
 
-Sysmon Event ID 1 logs process creation. By searching through these events, we identified a suspicious executable.
+Sysmon Event ID 1 logs process creation. Scanning through these events, I found this suspicious executable:
 
 ```json
 {
@@ -50,13 +52,13 @@ Sysmon Event ID 1 logs process creation. By searching through these events, we i
 }
 ```
 
-The file path uses double backslashes (`\\`) because this is how backslashes are escaped in JSON strings. The double `.exe.exe` extension is a common trick used by attackers to deceive users who might have file extensions hidden, making the file appear as `Preventivo24.02.14.exe`.
+The double `.exe.exe` extension is a classic trick - if someone has file extensions hidden in Windows, this would just show up as `Preventivo24.02.14.exe`, looking like a normal executable. Pretty sneaky.
 
 ### T3: Which Cloud drive was used to distribute the malware?
 
 **Answer:** `Dropbox`
 
-When a file is downloaded from the internet, Windows often adds a `Zone.Identifier` Alternate Data Stream (ADS) to it. This stream contains metadata about the file's origin. Sysmon logs the creation of this ADS, and by examining the `Contents` field, we can find the `ReferrerUrl`.
+When you download a file from the internet, Windows adds a `Zone.Identifier` Alternate Data Stream (ADS) to track where it came from. Sysmon logs when this ADS gets created, and the `Contents` field shows the `ReferrerUrl`:
 
 ```json
 {
@@ -69,13 +71,13 @@ When a file is downloaded from the internet, Windows often adds a `Zone.Identifi
 }
 ```
 
-The `ReferrerUrl` clearly points to `https://www.dropbox.com/`.
+The `ReferrerUrl` clearly points to Dropbox.
 
 ### T4: What was the timestamp changed to for the PDF file?
 
 **Answer:** `2024-01-14 08:10:06`
 
-The attacker used a defense evasion technique called "Time Stomping" to make malicious files look older and blend in with legitimate ones. Sysmon's Event ID 2 ("A process changed a file creation time") helps us detect this.
+The attacker used timestomping - a defense evasion technique where you change file timestamps to make malicious files blend in. Sysmon's Event ID 2 catches this:
 
 ```json
 {
@@ -90,13 +92,13 @@ The attacker used a defense evasion technique called "Time Stomping" to make mal
 }
 ```
 
-The log shows that the file's creation time (`CreationUtcTime`) was changed to a date one month in the past. The original, true creation time is preserved in the `PreviousCreationUtcTime` field.
+You can see the file's creation time got backdated by about a month. The `PreviousCreationUtcTime` shows when the file was actually created.
 
 ### T5: Where was "once.cmd" created on disk?
 
 **Answer:** `C:\Users\CyberJunkie\AppData\Roaming\Photo and Fax Vn\Photo and vn 1.1.2\install\F97891C\WindowsVolume\Games\once.cmd`
 
-By filtering for "FileCreate" (Event ID 11) events where the target filename is `once.cmd`, we can find its full creation path.
+Filtered for "FileCreate" (Event ID 11) events where the target filename is `once.cmd`:
 
 ```json
 {
@@ -107,13 +109,14 @@ By filtering for "FileCreate" (Event ID 11) events where the target filename is 
   }
 }
 ```
-The `TargetFilename` field gives us the exact location.
+
+Quite the nested folder structure there. The `TargetFilename` field gives the full path.
 
 ### T6: What domain name did it try to connect to?
 
 **Answer:** `www.example.com`
 
-Malware often performs a DNS query for a well-known, non-malicious domain to check for internet connectivity. Sysmon Event ID 22 ("DnsQuery") logs these requests.
+Malware often does a quick DNS lookup to check if there's internet connectivity. Sysmon Event ID 22 logs DNS queries:
 
 ```json
 {
@@ -124,26 +127,28 @@ Malware often performs a DNS query for a well-known, non-malicious domain to che
   }
 }
 ```
-The `QueryName` field shows the process queried for `www.example.com`.
+
+`www.example.com` is a safe, well-known domain that's commonly used for connectivity checks.
 
 ### T7: Which IP address did the malicious process try to reach out to?
 
 **Answer:** `93.184.216.34`
 
-The `QueryResults` field from the same DNS query event shows the IP addresses resolved for the domain.
+From the same DNS query event, the `QueryResults` field shows what IP addresses got resolved:
 
 ```json
 {
   "QueryResults": "::ffff:93.184.216.34;199.43.135.53;2001:500:8f::53;199.43.133.53;2001:500:8d::53;"
 }
 ```
-The result `::ffff:93.184.216.34` is an IPv4-mapped IPv6 address, which directly corresponds to the IPv4 address `93.184.216.34`.
+
+The `::ffff:93.184.216.34` is an IPv4-mapped IPv6 address that corresponds to IPv4 `93.184.216.34`.
 
 ### T8: When did the process terminate itself?
 
 **Answer:** `2024-02-14 03:41:58`
 
-We can determine the process termination time by finding the last recorded activity from that process. Sysmon Event ID 5 logs process termination, but in its absence, the timestamp of the last known action serves as a strong indicator. The last file creation events by this process occurred at `03:41:58`.
+I looked for the last activity from this process. While there wasn't a specific Event ID 5 (process termination) log, the last file creation events by this process happened at `03:41:58`:
 
 ```json
 {
@@ -154,4 +159,31 @@ We can determine the process termination time by finding the last recorded activ
   }
 }
 ```
-After this time, we see no further activity from `ProcessId: 10672`, indicating it had terminated.
+
+After this timestamp, ProcessId 10672 goes silent, so that's when it terminated.
+
+## Reflections
+
+This Sherlock was a great introduction to Sysmon log analysis. Working with the JSON format made it much easier to grep through and find specific events compared to trying to parse raw Windows event logs.
+
+The timestomping technique in T4 was particularly interesting - I hadn't seen that defense evasion tactic in action before. It's clever how attackers try to make their files look like they've been on the system for a while.
+
+The double `.exe.exe` extension trick is also something I've heard about but never actually seen in logs. It's a good reminder of how social engineering still plays a huge role in getting initial access.
+
+Overall, this challenge does a nice job of walking through a typical malware execution flow: 
+
+:::tip Attack Flow
+📥 **Initial download**
+➡️
+⚙️ **Execution** 
+➡️
+🕐 **Timestomping for evasion**
+➡️
+🌐 **Connectivity check**
+➡️
+📄 **File creation**
+➡️
+🚀 **Payload deployment**
+:::
+
+The Sysmon logs tell a pretty complete story once you know which Event IDs to look for.

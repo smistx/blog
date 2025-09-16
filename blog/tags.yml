@@ -52,3 +52,11 @@ docusaurus:
   label: Docusaurus
   permalink: /docusaurus
   description: Posts related to the Docusaurus static site generator.
+
+conference:
+  label: 'Conference'
+  description: 'Summaries, key takeaways, and reflections from cybersecurity conferences.'
+
+reflections:
+  label: 'Reflections'
+  description: 'Personal thoughts, career reflections, and lessons learned.'
